@@ -2,7 +2,7 @@ trigger:
   - none
 
 variables:
-  agent-name: ubuntu-latest
+  agent-name: windows-latest
 
 pool:
   vmImage: $(agent-name)
