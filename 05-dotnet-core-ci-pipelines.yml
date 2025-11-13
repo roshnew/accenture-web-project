@@ -10,7 +10,8 @@ stages:
     jobs:
       - job: 'Build'
         pool:
-          vmImage: 'windows-latest'
+          # vmImage: 'windows-latest'
+          name: accenture-pool
         steps:
           - script: dotnet build --configuration $(configuration)
             displayName: 'dotnet build'
