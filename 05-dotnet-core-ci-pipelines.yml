@@ -1,0 +1,21 @@
+trigger:
+- main
+
+variables:
+  configuration: 'Release'
+
+stages:
+  - stage: 
+    displayName: 'Build Project'
+    jobs:
+      - job: 'Build'
+        pool:
+          vmImage: 'windows-latest'
+        steps:
+          - script: dotnet build --configuration $(configuration)
+            displayName: 'dotnet build'
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: 'publish'
+              publishWebProjects: true
+              arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStaggingDirectory)'
