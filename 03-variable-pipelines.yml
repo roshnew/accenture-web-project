@@ -1,0 +1,26 @@
+trigger:
+  - none
+
+variables:
+  agent-name: windows-latest
+  my-agent-pool: accenture-pool
+
+pool:
+  # vmImage: $(agent-name)
+  name: $(my-agent-pool)
+
+steps:
+  - script: |
+      echo 'Agent.Name = $(Agent.Name)'
+      echo 'Agent.MachineName = $(Agent.MachineName)'
+      echo 'Agent.WorkFolder = $(Agent.WorkFolder)'
+      echo 'Agent.HomeDirectory = $(Agent.HomeDirectory)'
+      echo 'Build.BuildId = $(Build.BuildId)'
+      echo 'Build.BuildNumber = $(Build.BuildNumber)'
+      echo 'Build.ArtifactStagingDirectory = $(Build.ArtifactStagingDirectory)'
+      echo 'Build.SourcesDirectory = $(Build.SourcesDirectory)'
+      echo 'Build.StagingDirectory = $(Build.StagingDirectory)'
+      echo 'Build.Reason = $(Build.Reason)'
+      echo 'Build.BinariesDirectory = $(Build.BinariesDirectory)'
+      echo 'System.defaultWorkingDirectory = $(System.defaultWorkingDirectory)'
+    displayName: "Predefined Variables"

@@ -1,0 +1,28 @@
+trigger:
+- main
+
+variables:
+  configuration: 'Release'
+
+stages:
+  - stage: 
+    displayName: 'Build Project'
+    jobs:
+      - job: 'Build'
+        pool:
+          # vmImage: 'windows-latest'
+          name: accenture-pool
+        steps:
+          - script: dotnet build --configuration $(configuration)
+            displayName: 'dotnet build'
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: 'publish'
+              publishWebProjects: true
+              arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: 'drop'
+              publishLocation: 'Container'
